@@ -39,7 +39,7 @@ filter p (x:xs)
 One blank line between top-level definitions. No blank lines between
 type signatures and function definitions. Add one blank line between
 functions in a type class instance declaration if the function bodies
-are large. Use your judgement.
+are large. Use your judgment.
 
 ### Whitespace
 
@@ -103,6 +103,9 @@ data Array e = Array
   {-# UNPACK #-} !Int
   !ByteArray
 ```
+
+Place compiler LANGUAGE pragmas (like `{-# LANGUAGE TemplateHaskell #-}`)
+at the header of the file.
 
 ### Hanging Lambdas
 
@@ -212,10 +215,29 @@ changes in these libraries. Exception: The Prelude.
 Comments
 --------
 
+Comment syntax should be compatible with Haddock's documentation
+generation.
+
 ### Punctuation
 
 Write proper sentences; start with a capital letter and use proper
 punctuation.
+
+### Modules
+
+All Haskell source files should start with a Haddock header like:
+
+```haskell
+-- |
+-- Module:      <Module file path>
+-- Copyright:   (c) <Year> Swift Navigation
+-- License:     <license>
+-- Maintainer:  <author full name> <<author email>>
+--
+-- <Short module description>
+--
+-- <Longer module description>
+```
 
 ### Top-Level Definitions
 
@@ -372,6 +394,17 @@ mysum = go 0
   where
     go !acc []    = acc
     go acc (x:xs) = go (acc + x) xs
+```
+
+Tools
+-----
+
+Repositories have some sensible defaults for linting and style
+checking, which should be used pre-commit:
+
+```
+make lint
+make stylish
 ```
 
 Misc
